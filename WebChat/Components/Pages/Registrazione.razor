@@ -5,7 +5,39 @@
 @inject BancaDati db
 
 <h3>Registrazione</h3>
-
+<p>@messaggio</p>
+<p>Per poter registrare un tuo account su questo portale, usa i campi qui sotto e premi registra!</p>
+<p>
+    <label for="nomeUtente">Nome utente</label>
+    <input id="nomeUtente" @bind="draft.Nome" />
+</p>
+<p>
+    <label for="email">Indirizzo email</label>
+    <input id="email" @bind="draft.Email"/>
+</p>
+<p>
+    <label for="password">Password per l'account</label>
+    <input type="password" id="password" @bind="draft.Password" />
+</p>
+<p>
+    <button @onclick="Registra">registra</button>
+</p>
 @code {
+    private Utente draft = new Utente();
+    private string messaggio = string.Empty;
 
+    private void Registra()
+    {
+        if (db.Utenti.Any(x => x.Email == draft.Email))
+        {
+            messaggio = "Errore: indirizzo email già registrato!";
+        }
+        else
+        {
+            db.Utenti.Add(draft);
+            db.SaveChanges();
+            draft = new Utente();
+            messaggio = "Grazie della tua registrazione!";
+        }
+    }
 }

@@ -1,6 +1,40 @@
 ﻿@page "/login"
+
+@using WebChat.Dati
+@using WebChat.Dati.Strutture
+@inject BancaDati db
+@inject Sessione sessione
+
 <h3>Login</h3>
 
-@code {
+@if (sessione.utente == null)
+{
+    <p>
+        <input placeholder="Email..." @bind="draft.Email" />
+    </p>
+    <p>
+        <input placeholder="Password..." type="password" @bind="draft.Password" />
+    </p>
+    <p>
+        <button @onclick="Controllo">Accedi</button>
+    </p>
+} else
+{
+    <p>Bentornato @sessione.utente.Nome, finalmente ci rivediamo!</p>
+}
 
+
+@code {
+    private Utente draft = new Utente();
+    private string messaggio = string.Empty;
+    private int volte = 0;
+
+    private void Controllo()
+    {
+        volte++;
+        if (volte < 4 && db.Utenti.Any(x => x.Email == draft.Email && x.Password == draft.Password))
+        {
+            sessione.utente = db.Utenti.First(x => x.Email == draft.Email && x.Password == draft.Password);
+        }
+    }
 }

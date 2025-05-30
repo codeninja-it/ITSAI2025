@@ -1,5 +1,6 @@
 using WebChat.Components;
 using WebChat.Dati;
+using WebChat.Dati.Strutture;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddDbContext<BancaDati>();
+builder.Services.AddTransient<Sessione>();
 
 var app = builder.Build();
 

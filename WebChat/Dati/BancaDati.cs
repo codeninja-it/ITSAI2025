@@ -6,8 +6,8 @@ namespace WebChat.Dati
     public class BancaDati : DbContext
     {
 
-        DbSet<Utente> Utenti { get; set; }
-        DbSet<Messaggio> Messaggi { get; set; }
+        public DbSet<Utente> Utenti { get; set; }
+        public DbSet<Messaggio> Messaggi { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
