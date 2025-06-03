@@ -30,15 +30,17 @@
         {
             BtnCalcola = new Button();
             PctPreview = new PictureBox();
+            DlgApri = new OpenFileDialog();
+            TxtRisultato = new TextBox();
             ((System.ComponentModel.ISupportInitialize)PctPreview).BeginInit();
             SuspendLayout();
             // 
             // BtnCalcola
             // 
             BtnCalcola.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            BtnCalcola.Location = new Point(12, 763);
+            BtnCalcola.Location = new Point(12, 486);
             BtnCalcola.Name = "BtnCalcola";
-            BtnCalcola.Size = new Size(825, 60);
+            BtnCalcola.Size = new Size(719, 60);
             BtnCalcola.TabIndex = 0;
             BtnCalcola.Text = "Calcola";
             BtnCalcola.UseVisualStyleBackColor = true;
@@ -49,26 +51,46 @@
             PctPreview.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             PctPreview.Location = new Point(12, 12);
             PctPreview.Name = "PctPreview";
-            PctPreview.Size = new Size(825, 745);
+            PctPreview.Size = new Size(719, 468);
             PctPreview.TabIndex = 1;
             PctPreview.TabStop = false;
+            // 
+            // DlgApri
+            // 
+            DlgApri.FileName = "openFileDialog1";
+            DlgApri.Title = "Apri immagine da analizzare";
+            // 
+            // TxtRisultato
+            // 
+            TxtRisultato.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            TxtRisultato.Location = new Point(12, 552);
+            TxtRisultato.Multiline = true;
+            TxtRisultato.Name = "TxtRisultato";
+            TxtRisultato.ScrollBars = ScrollBars.Vertical;
+            TxtRisultato.Size = new Size(719, 322);
+            TxtRisultato.TabIndex = 2;
+            TxtRisultato.WordWrap = false;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(849, 835);
+            ClientSize = new Size(743, 886);
+            Controls.Add(TxtRisultato);
             Controls.Add(PctPreview);
             Controls.Add(BtnCalcola);
             Name = "Form1";
             Text = "Computer Vision 1";
             ((System.ComponentModel.ISupportInitialize)PctPreview).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Button BtnCalcola;
         private PictureBox PctPreview;
+        private OpenFileDialog DlgApri;
+        private TextBox TxtRisultato;
     }
 }

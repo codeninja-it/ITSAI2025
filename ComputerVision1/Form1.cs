@@ -8,13 +8,19 @@ namespace ComputerVision1
         {
             InitializeComponent();
             argomenti = inIngresso;
-            BtnCalcola.Text = $"{inIngresso[0]} x {inIngresso[1]}";
+            BtnCalcola.Text = "Apri immagine";
         }
 
         private void BtnCalcola_Click(object sender, EventArgs e)
         {
-            Form1 nuovaFinestra = new Form1(argomenti);
-            nuovaFinestra.Show();
+            if(DlgApri.ShowDialog() == DialogResult.OK)
+            {
+                MessageBox.Show($"Hai scelto di aprire il file {DlgApri.FileName}!");
+                if (DlgApri.FileName.EndsWith(".txt"))
+                {
+                    TxtRisultato.Text = File.ReadAllText(DlgApri.FileName);
+                }
+            }
         }
     }
 }
