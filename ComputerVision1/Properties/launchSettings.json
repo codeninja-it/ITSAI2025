@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ComputerVision1": {
+      "commandName": "Project",
+      "commandLineArgs": "2 10"
+    }
+  }
+}
