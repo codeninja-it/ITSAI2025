@@ -15,11 +15,9 @@ namespace ComputerVision1
         {
             if(DlgApri.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show($"Hai scelto di aprire il file {DlgApri.FileName}!");
-                if (DlgApri.FileName.EndsWith(".txt"))
-                {
-                    TxtRisultato.Text = File.ReadAllText(DlgApri.FileName);
-                }
+                PctPreview.Image =
+                    Image.FromFile(DlgApri.FileName);
+                TxtRisultato.Text += $"Immagine caricata nelle dimensioni {PctPreview.Size}!";
             }
         }
     }

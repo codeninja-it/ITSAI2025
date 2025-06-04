@@ -52,6 +52,7 @@
             PctPreview.Location = new Point(12, 12);
             PctPreview.Name = "PctPreview";
             PctPreview.Size = new Size(719, 468);
+            PctPreview.SizeMode = PictureBoxSizeMode.StretchImage;
             PctPreview.TabIndex = 1;
             PctPreview.TabStop = false;
             // 
