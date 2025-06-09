@@ -10,5 +10,12 @@ namespace CRM
             db = bancaDati;
             InitializeComponent();
         }
+
+        private void BtnSalva_Click(object sender, EventArgs e)
+        {
+            LstContatti.Items.Clear();
+            LstContatti.Items.Add("casa");
+            //LstContatti.SelectedItem;
+        }
     }
 }

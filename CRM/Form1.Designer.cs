@@ -28,12 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            LstContatti = new ListBox();
+            BtnSalva = new Button();
+            SuspendLayout();
+            // 
+            // LstContatti
+            // 
+            LstContatti.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            LstContatti.FormattingEnabled = true;
+            LstContatti.Location = new Point(12, 12);
+            LstContatti.Name = "LstContatti";
+            LstContatti.Size = new Size(240, 676);
+            LstContatti.TabIndex = 0;
+            // 
+            // BtnSalva
+            // 
+            BtnSalva.Location = new Point(1060, 642);
+            BtnSalva.Name = "BtnSalva";
+            BtnSalva.Size = new Size(150, 46);
+            BtnSalva.TabIndex = 1;
+            BtnSalva.Text = "button1";
+            BtnSalva.UseVisualStyleBackColor = true;
+            BtnSalva.Click += BtnSalva_Click;
+            // 
+            // Form1
+            // 
+            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1222, 722);
+            Controls.Add(BtnSalva);
+            Controls.Add(LstContatti);
+            Name = "Form1";
+            Text = "Form1";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private ListBox LstContatti;
+        private Button BtnSalva;
     }
 }
