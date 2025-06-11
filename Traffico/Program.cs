@@ -1,12 +1,24 @@
-﻿using Accord.Video;
+﻿//MJPEGStream video = new MJPEGStream("https://video.autostrade.it/video-mp4_hq/dt4/53c1cb2d-9a8d-4882-b3e5-dab0528ebe5d-29.mp4");
+using Emgu.CV;
+using System.Drawing.Imaging;
 
-MJPEGStream video = new MJPEGStream("https://video.autostrade.it/video-mp4_hq/dt4/53c1cb2d-9a8d-4882-b3e5-dab0528ebe5d-29.mp4");
+if (!Directory.Exists("sintetiche"))
+    Directory.CreateDirectory("sintetiche");
 
-video.NewFrame += Video_NewFrame;
-
-video.Start();
-
-void Video_NewFrame(object sender, NewFrameEventArgs eventArgs)
+VideoCapture video = new VideoCapture("https://video.autostrade.it/video-mp4_hq/dt4/53c1cb2d-9a8d-4882-b3e5-dab0528ebe5d-29.mp4");
+Mat frame = new Mat();
+int i = 0;
+while (video.Grab())
 {
-    Console.WriteLine(video.FramesReceived);
+    video.Retrieve(frame);
+    CvInvoke.CvtColor(frame, frame, Emgu.CV.CvEnum.ColorConversion.Rgb2Hls);
+    //CvInvoke.CvtColor(frame, frame, Emgu.CV.CvEnum.ColorConversion.Rgb2Gray);
+
+    frame
+        .ToBitmap()
+        .Save(
+            Path.Combine("sintetiche", $"f_{i}.jpg"),
+            ImageFormat.Jpeg
+        );
+    i++;
 }
