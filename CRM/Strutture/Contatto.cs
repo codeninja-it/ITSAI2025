@@ -16,5 +16,9 @@ namespace CRM.Strutture
         public string Nome { get; set; } = string.Empty;
         public string Cognome { get; set; } = string.Empty;
         public string Email {  get; set; } = string.Empty;
+        public override string ToString()
+        {
+            return $"{Cognome} {Nome}";
+        }
     }
 }

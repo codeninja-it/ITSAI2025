@@ -61,5 +61,10 @@ namespace CRM
             TxtNome.Text = ((Contatto)LstContatti.SelectedItem).Nome;
             TxtCognome.Text = ((Contatto)LstContatti.SelectedItem).Cognome;
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            AggiornaLista();
+        }
     }
 }
