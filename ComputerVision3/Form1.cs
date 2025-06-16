@@ -35,7 +35,7 @@ namespace ComputerVision3
             Mat appoggio = new Mat();
             video.Retrieve(appoggio);
             CvInvoke.CvtColor(appoggio, appoggio, ColorConversion.Rgb2Gray);
-            CvInvoke.GaussianBlur(appoggio, appoggio, new Size(3, 3), 1);
+            //CvInvoke.GaussianBlur(appoggio, appoggio, new Size(3, 3), 1);
             return appoggio;
         }
 
@@ -43,50 +43,65 @@ namespace ComputerVision3
         {
             using (VideoCapture video = new VideoCapture(TxtVideo.Text))
             {
-                Mat prima = PrelevaFotogramma(video);
-                Mat seconda = PrelevaFotogramma(video);
-                if(prima != null && seconda != null)
+                Mat vecchia = new Mat();
+                while(video.Grab())
                 {
-                    CvInvoke.AbsDiff(seconda, prima, seconda);
-                    CvInvoke.Threshold(seconda, seconda, TrkThreshold.Value, 255, ThresholdType.Otsu);
-                    
-                    VectorOfVectorOfPoint contorni = new VectorOfVectorOfPoint();
-                    CvInvoke.FindContours(seconda, contorni, null, RetrType.List, ChainApproxMethod.ChainApproxSimple);
-                    List<VectorOfPoint> candidati = new List<VectorOfPoint>();
-                    for(int i=0; i < contorni.Size; i++)
+                    Mat aColori = new Mat();
+                    video.Retrieve(aColori);
+                    Mat attuale = new Mat();
+                    CvInvoke.CvtColor(aColori, attuale, ColorConversion.Rgb2Gray);
+                    if (!vecchia.IsEmpty)
                     {
-                        // se estraggo un contorno per volta
-                        VectorOfPoint contorno = contorni[i];
-                        VectorOfPoint semplificata = new VectorOfPoint();
-                        CvInvoke.ApproxPolyDP( // per semplificarla
-                            contorno, // come origine
-                            semplificata, // nella destinazione
-                            CvInvoke.ArcLength(contorno, true) * 0.05, // ottenendo il 5% della lunghezza
-                            true // dammi solo forme chiuse
-                        );
-                        candidati.Add( semplificata );
-                    }
+                        CvInvoke.Threshold(attuale, attuale, (double)TrkThreshold.Value, 255, ThresholdType.Binary);
+                        Mat differenza = new Mat();
+                        CvInvoke.AbsDiff(attuale, vecchia, differenza);
+                        
+                        VectorOfVectorOfPoint contorni = new VectorOfVectorOfPoint();
+                        CvInvoke.FindContours(differenza, contorni, null, RetrType.List, ChainApproxMethod.ChainApproxSimple);
+                        List<VectorOfPoint> candidati = new List<VectorOfPoint>();
+                        for (int i = 0; i < contorni.Size; i++)
+                        {
+                            // se estraggo un contorno per volta
+                            VectorOfPoint contorno = contorni[i];
+                            VectorOfPoint semplificata = new VectorOfPoint();
+                            CvInvoke.ApproxPolyDP( // per semplificarla
+                                contorno, // come origine
+                                semplificata, // nella destinazione
+                                CvInvoke.ArcLength(contorno, true) * 0.05, // ottenendo il 5% della lunghezza
+                                true // dammi solo forme chiuse
+                            );
+                            candidati.Add(semplificata);
+                        }
 
-                    foreach(VectorOfPoint singolo in candidati.Where(x => x.Size == 4))
-                    {
-                        Console.WriteLine(singolo.ToString());
-                        Rectangle envelope = new Rectangle(
-                                    
-                        );
-                        //CvInvoke.Rectangle(
-                        //    seconda,
-                        //    new Rectangle()
-                        //);
-                    }
+                        foreach (VectorOfPoint singolo in candidati.Where(x => x.Size == 4))
+                        {
+                            Point[] geometria = singolo.ToArray();
+                            Rectangle envelope = new Rectangle(
+                                geometria.Min(p => p.X),
+                                geometria.Min(p => p.Y),
+                                geometria.Max(p => p.X) - geometria.Min(p => p.X),
+                                geometria.Max(p => p.Y) - geometria.Min(p => p.Y)
+                            );
+                            if (envelope.Width * envelope.Height > TrkArea.Value)
+                                CvInvoke.Rectangle(
+                                    aColori,
+                                    envelope,
+                                    new MCvScalar(0, 0, 200)
+                                );
+                        }
 
-                    PctPreview.Image = seconda.ToBitmap();
+                        PctPreview.Image = aColori.ToBitmap();
+                        PctPreview.Invalidate();
+                        Application.DoEvents();
+                    }
+                    vecchia = attuale;
                 }
-
             }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            TxtVideo.Text = "https://video.autostrade.it/video-mp4_hq/dt4/53c1cb2d-9a8d-4882-b3e5-dab0528ebe5d-29.mp4";
             DlgVideo.Filter = "File MP4|*.mp4|Tutti i files|*.*";
             DlgVideo.Title = "Seleziona file video";
             DlgVideo.FileName = "c:\\";

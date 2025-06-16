@@ -40,8 +40,11 @@
             label3 = new Label();
             DlgVideo = new OpenFileDialog();
             PctPreview = new PictureBox();
+            label4 = new Label();
+            TrkArea = new TrackBar();
             ((System.ComponentModel.ISupportInitialize)TrkThreshold).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PctPreview).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)TrkArea).BeginInit();
             SuspendLayout();
             // 
             // TxtVideo
@@ -105,7 +108,7 @@
             // BtnPreview
             // 
             BtnPreview.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            BtnPreview.Location = new Point(12, 192);
+            BtnPreview.Location = new Point(12, 288);
             BtnPreview.Name = "BtnPreview";
             BtnPreview.Size = new Size(917, 46);
             BtnPreview.TabIndex = 6;
@@ -124,6 +127,7 @@
             TrkThreshold.SmallChange = 5;
             TrkThreshold.TabIndex = 7;
             TrkThreshold.TickFrequency = 5;
+            TrkThreshold.Value = 100;
             // 
             // label3
             // 
@@ -141,18 +145,42 @@
             // PctPreview
             // 
             PctPreview.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            PctPreview.Location = new Point(12, 244);
+            PctPreview.Location = new Point(12, 340);
             PctPreview.Name = "PctPreview";
-            PctPreview.Size = new Size(917, 684);
+            PctPreview.Size = new Size(917, 588);
             PctPreview.SizeMode = PictureBoxSizeMode.StretchImage;
             PctPreview.TabIndex = 9;
             PctPreview.TabStop = false;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(12, 192);
+            label4.Name = "label4";
+            label4.Size = new Size(163, 32);
+            label4.TabIndex = 11;
+            label4.Text = "Area Poligono";
+            // 
+            // TrkArea
+            // 
+            TrkArea.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            TrkArea.LargeChange = 10;
+            TrkArea.Location = new Point(222, 192);
+            TrkArea.Maximum = 3000;
+            TrkArea.Name = "TrkArea";
+            TrkArea.Size = new Size(707, 90);
+            TrkArea.SmallChange = 5;
+            TrkArea.TabIndex = 10;
+            TrkArea.TickFrequency = 5;
+            TrkArea.Value = 1000;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(941, 940);
+            Controls.Add(label4);
+            Controls.Add(TrkArea);
             Controls.Add(PctPreview);
             Controls.Add(label3);
             Controls.Add(TrkThreshold);
@@ -168,6 +196,7 @@
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)TrkThreshold).EndInit();
             ((System.ComponentModel.ISupportInitialize)PctPreview).EndInit();
+            ((System.ComponentModel.ISupportInitialize)TrkArea).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -186,5 +215,7 @@
         private Label label3;
         private OpenFileDialog DlgVideo;
         private PictureBox PctPreview;
+        private Label label4;
+        private TrackBar TrkArea;
     }
 }
