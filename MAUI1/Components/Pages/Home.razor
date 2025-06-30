@@ -1,5 +1,21 @@
 ﻿@page "/"
+@using System.IO
+
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        File.AppendAllLines("log.txt", new[] { "Home page initialized at " + DateTime.Now.ToString() });
+
+        HttpClient client = new HttpClient();
+        client.GetAsync("");
+
+        base.OnInitialized();
+    }
+
+}
