@@ -75,12 +75,12 @@ namespace ComputerVision3
 
                         foreach (VectorOfPoint singolo in candidati.Where(x => x.Size == 4))
                         {
-                            Point[] geometria = singolo.ToArray();
+                            Point[] vertici = singolo.ToArray();
                             Rectangle envelope = new Rectangle(
-                                geometria.Min(p => p.X),
-                                geometria.Min(p => p.Y),
-                                geometria.Max(p => p.X) - geometria.Min(p => p.X),
-                                geometria.Max(p => p.Y) - geometria.Min(p => p.Y)
+                                vertici.Min(p => p.X),
+                                vertici.Min(p => p.Y),
+                                vertici.Max(p => p.X) - vertici.Min(p => p.X),
+                                vertici.Max(p => p.Y) - vertici.Min(p => p.Y)
                             );
                             if (envelope.Width * envelope.Height > TrkArea.Value)
                                 CvInvoke.Rectangle(
