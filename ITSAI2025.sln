@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Traffico", "Traffico\Traffi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputerVision3", "ComputerVision3\ComputerVision3.csproj", "{F9C790A5-87B9-4DDE-A9CC-ECB1D255FF03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAUI1", "MAUI1\MAUI1.csproj", "{FF1F240E-779F-4AB8-8ED0-BAECFDD2D1CB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAUI", "MAUI\MAUI.csproj", "{F020D95E-94EA-4C23-8295-D24900342FCC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,12 +71,12 @@ Global
 		{F9C790A5-87B9-4DDE-A9CC-ECB1D255FF03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9C790A5-87B9-4DDE-A9CC-ECB1D255FF03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9C790A5-87B9-4DDE-A9CC-ECB1D255FF03}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FF1F240E-779F-4AB8-8ED0-BAECFDD2D1CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FF1F240E-779F-4AB8-8ED0-BAECFDD2D1CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FF1F240E-779F-4AB8-8ED0-BAECFDD2D1CB}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{FF1F240E-779F-4AB8-8ED0-BAECFDD2D1CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FF1F240E-779F-4AB8-8ED0-BAECFDD2D1CB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FF1F240E-779F-4AB8-8ED0-BAECFDD2D1CB}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F020D95E-94EA-4C23-8295-D24900342FCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F020D95E-94EA-4C23-8295-D24900342FCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F020D95E-94EA-4C23-8295-D24900342FCC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F020D95E-94EA-4C23-8295-D24900342FCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F020D95E-94EA-4C23-8295-D24900342FCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F020D95E-94EA-4C23-8295-D24900342FCC}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
