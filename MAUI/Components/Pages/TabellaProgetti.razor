@@ -1,0 +1,56 @@
+﻿@using MAUI.Dati.Strutture
+@inject IJSRuntime js
+<div class="table-responsive">
+    <table class="table table-hover table-sm">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Descrizione</th>
+                <th>
+                    <button @onclick="Nuovo" class="btn btn-success">aggiungi</button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Progetto singolo in progetti)
+            {
+                <tr @onclick="e => Seleziona(singolo)">
+                    <td>@singolo.nome</td>
+                    <td>@singolo.descrizione</td>
+                    <td>
+                        <button class="btn btn-danger" @onclick="e => Cancella(singolo)" @onclick:stopPropagation="true">cancella</button>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    [Parameter]
+    public List<Progetto> progetti { get; set; } = new List<Progetto>();
+    [Parameter]
+    public EventCallback<Progetto> onCancella { get; set; }
+    [Parameter]
+    public EventCallback onNuovo { get; set; }
+    [Parameter]
+    public EventCallback<Progetto> onSeleziona { get; set; }
+
+    private void Seleziona(Progetto singolo)
+    {
+        onSeleziona.InvokeAsync(singolo);
+    }
+
+    private void Nuovo()
+    {
+        onNuovo.InvokeAsync();
+    }
+
+    private async void Cancella(Progetto singolo)
+    {
+        bool confermato = await js.InvokeAsync<bool>("confirm", "Sei sicuro?");
+        if (confermato)
+            onCancella.InvokeAsync(singolo);
+    }
+}

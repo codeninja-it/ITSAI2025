@@ -14,14 +14,24 @@ namespace MAUI.Dati.Strutture
         public List<Task> tasks { get; set; } = new List<Task>();
         public double Stato => this.tasks.Average(t => t.Stato);
 
-        public void AggiornaHash()
+        public string CreaHash()
         {
-            this.hash = Convert.ToBase64String(
+            return Convert.ToBase64String(
                 SHA256.HashData(
-                    Encoding.UTF8.GetBytes("s" + nome + descrizione +Stato + creazione.ToLongDateString())
+                    Encoding.UTF8.GetBytes($"p{nome}-{descrizione}-{creazione}")
                 )
             );
+        }
+
+        public void AggiornaHash()
+        {
+            this.hash = CreaHash();
             this.ultimaModifica = DateTime.Now;
+        }
+
+        public bool Verifica()
+        {
+            return hash == CreaHash();
         }
     }
 }

@@ -2,45 +2,40 @@
 @using MAUI.Dati
 @using MAUI.Dati.Strutture
 @inject Db db
-@inject IJSRuntime js
 
 <h3>Progetti</h3>
 
-<div class="table-responsive">
-    <table class="table table-hover table-sm">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Descrizione</th>
-                <th>
-                    <button @onclick="Nuovo" class="btn btn-success">aggiungi</button>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (Progetto singolo in db.progetti)
-            {
-                <tr>
-                    <td>@singolo.nome</td>
-                    <td>@singolo.descrizione</td>
-                    <td>
-                        <button class="btn btn-danger" @onclick="e => Cancella(singolo)">cancella</button>
-                    </td>
-                </tr>
-
-            }
-        </tbody>        
-    </table>
-</div>
+@if(inUso == null)
+{
+    <TabellaProgetti progetti="db.progetti" onNuovo="Nuovo" onSeleziona="Selezione" onCancella="Cancella" />
+} else
+{
+    <DettaglioProgetto progetto="inUso" />
+}
 
 @code {
+
+    Progetto inUso = null;
+
+    private void Selezione(Progetto progetto)
+    {
+        inUso = progetto;
+    }
+
+    private void Nuovo()
+    {
+        Progetto nuovo = new Progetto() {
+            nome = "Nuovo Progetto",
+            descrizione = "nuovo progetto da compilare"
+        };
+        nuovo.AggiornaHash();
+        db.progetti.Add(nuovo);
+    }
 
 
     private async void Cancella(Progetto progetto)
     {
-        bool confermato = await js.InvokeAsync<bool>("confirm", "Sei sicuro?");
-        if (confermato)
-            db.progetti.Remove(progetto);
+       db.progetti.Remove(progetto);
     }
 
 }

@@ -9,17 +9,34 @@ namespace MAUI.Dati.Strutture
 {
     public class Task : Sicurezza
     {
-        public string nome { get; set; } = "";
+        public string Nome { get; set; } = "";
         public double Stato { get; set; } = 0.0;
+
+        public void Aggiorna(string nome, double stato)
+        {
+            Nome = nome;
+            Stato = stato;
+            AggiornaHash();
+        }
+
+        public string CreaHash()
+        {
+            return Convert.ToBase64String(
+                SHA256.HashData(
+                    Encoding.UTF8.GetBytes($"t{Nome}-{Stato}-{creazione}")
+                )
+            );
+        }
 
         public void AggiornaHash()
         {
-            hash = Convert.ToBase64String(
-                SHA256.HashData(
-                    Encoding.UTF8.GetBytes("t" + nome + Stato + creazione.ToLongDateString())
-                )
-            );
+            hash = CreaHash();
             ultimaModifica = DateTime.Now;
+        }
+
+        public bool Verifica()
+        {
+            return hash == CreaHash();
         }
     }
 }
