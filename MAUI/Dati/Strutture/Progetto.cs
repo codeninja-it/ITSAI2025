@@ -12,7 +12,7 @@ namespace MAUI.Dati.Strutture
         public string nome { get; set; } = "";
         public string descrizione { get; set; } = "";
         public List<Task> tasks { get; set; } = new List<Task>();
-        public double Stato => this.tasks.Average(t => t.Stato);
+        public int Stato => tasks.Count == 0 ? 100 : (int)this.tasks.Average(t => t.Stato);
 
         public string CreaHash()
         {

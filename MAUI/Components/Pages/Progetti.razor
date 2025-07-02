@@ -10,7 +10,7 @@
     <TabellaProgetti progetti="db.progetti" onNuovo="Nuovo" onSeleziona="Selezione" onCancella="Cancella" />
 } else
 {
-    <DettaglioProgetto progetto="inUso" />
+    <DettaglioProgetto progetto="inUso" onTorna="Deselezione" />
 }
 
 @code {
@@ -22,6 +22,11 @@
         inUso = progetto;
     }
 
+    private void Deselezione()
+    {
+        inUso = null;
+    }
+
     private void Nuovo()
     {
         Progetto nuovo = new Progetto() {
@@ -30,6 +35,7 @@
         };
         nuovo.AggiornaHash();
         db.progetti.Add(nuovo);
+        inUso = nuovo;
     }
 
 

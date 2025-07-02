@@ -1,5 +1,37 @@
-﻿<h3>DettaglioProgetto</h3>
+﻿@using MAUI.Dati.Strutture
+
+<div class="row g-3">
+    <div class="col-md-12">
+        <label for="nome">Nome del progetto</label>
+        <input @bind="progetto.nome" id="nome" class="form-control" />
+    </div>
+    <div class="col-md-12">
+        <label for="descrizione">Descrizione del perimetro</label>
+        <textarea id="descrizione" class="form-control" @bind="progetto.descrizione" />
+    </div>
+    <div class="col-md-12">
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: @progetto.Stato%;" aria-valuenow="@progetto.Stato" aria-valuemin="0" aria-valuemax="100">@progetto.Stato%</div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <ListaTask tasks="progetto.tasks" />
+    </div>
+    <div class="col-md-12">
+        <button class="btn btn-secondary w-100" @onclick="Torna">torna</button>
+    </div>
+</div>
 
 @code {
+    [Parameter]
+    public Progetto progetto { get; set; } = new Progetto();
 
+    [Parameter]
+    public EventCallback onTorna { get; set; }
+
+    private void Torna()
+    {
+        onTorna.InvokeAsync();
+
+    }
 }
