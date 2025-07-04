@@ -1,4 +1,5 @@
 ﻿@inherits LayoutComponentBase
+@implements IDisposable
 
 <div class="page">
     <div class="sidebar">
@@ -15,3 +16,10 @@
         </article>
     </main>
 </div>
+
+@code {
+    public void Dispose()
+    {
+        Console.WriteLine("Disposing MainLayout");
+    }
+}

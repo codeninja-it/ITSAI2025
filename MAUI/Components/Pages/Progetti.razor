@@ -35,6 +35,7 @@
         };
         nuovo.AggiornaHash();
         db.progetti.Add(nuovo);
+        db.Save();
         inUso = nuovo;
     }
 
@@ -42,6 +43,7 @@
     private async void Cancella(Progetto progetto)
     {
        db.progetti.Remove(progetto);
+        db.Save();
     }
 
 }

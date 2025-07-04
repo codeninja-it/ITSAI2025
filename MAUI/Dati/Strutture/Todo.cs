@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 
 namespace MAUI.Dati.Strutture
 {
-    public class Task : Sicurezza
+    public class Todo : Sicurezza
     {
         public string Nome { get; set; } = "";
         public double Stato { get; set; } = 0.0;

@@ -1,0 +1,36 @@
+﻿@using MAUI.Dati.Strutture;
+
+<div class="row g-3">
+    @foreach(Todo singolo in tasks)
+    {
+        <div class="col-md-12">
+            <div class="input-group">
+                <input @bind="singolo.Nome" placeholder="descrizione todo..." class="form-control" />
+                <button class="btn btn-danger" @onclick="e => Cancella(singolo)">cancella</button>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <input type="range" min="0" max="100" @bind="singolo.Stato" class="form-range" />
+        </div>
+    }
+</div>
+<div class="row mt-3">
+    <div class="col-md-12">
+        <button class="btn btn-outline-success w-100" @onclick="Nuovo">aggiungi</button>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public List<Todo> tasks { get; set; } = new List<Todo>();
+
+    private void Nuovo()
+    {
+        tasks.Add( new Todo() );
+    }
+
+    private void Cancella(Todo todo)
+    {
+        tasks.Remove(todo);
+    }
+}
